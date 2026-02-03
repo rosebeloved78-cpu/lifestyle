@@ -45,8 +45,8 @@ export default function DiasporaConnect() {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16">
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-rose-400 mb-4">Diaspora Connect</h1>
-          <p className="text-xl text-white-600">Connect Zimbabweans across borders</p>
+          <h1 className="text-5xl font-bold text-rose-600 mb-4">Diaspora Connect</h1>
+          <p className="text-xl text-black-600">Connect Zimbabweans across borders</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
