@@ -1,0 +1,134 @@
+================================================================================
+                    EXACT COMMANDS TO RUN - COPY & PASTE
+================================================================================
+
+DO THIS IN ORDER:
+
+================================================================================
+STEP 1: OPEN YOUR TERMINAL
+================================================================================
+
+Windows: Press Windows Key + R, type "cmd", press Enter
+Mac: Press Command + Space, type "terminal", press Enter
+Linux: Right-click desktop, select "Open Terminal Here"
+
+================================================================================
+STEP 2: GO TO YOUR PROJECT FOLDER
+================================================================================
+
+If your project is on Desktop, paste this:
+
+WINDOWS:
+cd C:\Users\YourName\Desktop\lifestyle-connect
+
+Replace "YourName" with your actual username!
+
+MAC:
+cd ~/Desktop/lifestyle-connect
+
+LINUX:
+cd ~/Desktop/lifestyle-connect
+
+Then press ENTER
+
+================================================================================
+STEP 3: INSTALL DEPENDENCIES (FIRST TIME ONLY)
+================================================================================
+
+Copy and paste this command:
+
+npm install
+
+Press ENTER and wait 2-3 minutes for it to finish.
+
+================================================================================
+STEP 4: BUILD YOUR APP
+================================================================================
+
+Copy and paste this command:
+
+npm run build
+
+Press ENTER and wait for it to finish.
+
+You should see: "✓ built in X.XXs"
+
+================================================================================
+STEP 5: CREATE GITHUB ACCOUNT
+================================================================================
+
+Go to: https://github.com/signup
+Create account (it's FREE)
+Verify your email
+Login
+
+================================================================================
+STEP 6: CREATE GITHUB REPOSITORY
+================================================================================
+
+After logging into GitHub:
+
+1. Click "+" icon (top right)
+2. Click "New repository"
+3. Name: lifestyle-connect
+4. Description: A dating app for Zimbabweans
+5. Choose: Public
+6. Click "Create repository"
+
+GitHub will show you commands to run. Follow those exactly!
+
+================================================================================
+STEP 7: PUSH CODE TO GITHUB
+================================================================================
+
+Copy and paste these commands ONE AT A TIME in your terminal:
+
+Command 1:
+git init
+
+Command 2:
+git add .
+
+Command 3:
+git commit -m "Initial commit"
+
+Command 4 (GitHub will show you this - copy it exactly):
+git branch -M main
+git remote add origin https://github.com/YOUR-USERNAME/lifestyle-connect.git
+git push -u origin main
+
+Replace "YOUR-USERNAME" with your GitHub username!
+
+================================================================================
+STEP 8: DEPLOY TO VERCEL (EASIEST)
+================================================================================
+
+1. Go to: https://vercel.com/signup
+2. Click "Continue with GitHub"
+3. Click "Authorize Vercel"
+4. Click "Create new project"
+5. Select "lifestyle-connect" repository
+6. Click "Import"
+7. Click "Deploy"
+8. Wait 2-3 minutes
+9. You'll get a live URL!
+
+DONE! Your app is now live on the internet! 🎉
+
+================================================================================
+THAT'S ALL THE COMMANDS YOU NEED!
+================================================================================
+
+Summary:
+1. Open terminal
+2. Navigate to project (cd command)
+3. npm install
+4. npm run build
+5. Create GitHub account
+6. Create GitHub repository
+7. Push code (git commands)
+8. Deploy to Vercel
+
+Your app will be live!
+
+================================================================================

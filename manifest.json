@@ -1,0 +1,61 @@
+{
+  "name": "Lifestyle Connect - Christian Dating & Diaspora Connect",
+  "short_name": "Lifestyle Connect",
+  "description": "Find your Christian love story among believers in Zimbabwe. Connect, share your faith, and build meaningful relationships. For Zimbabweans only.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#f43f5e",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23f43f5e' width='192' height='192'/><text y='145' font-size='140' fill='white' text-anchor='middle' x='96'>❤️</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect fill='%23f43f5e' width='512' height='512'/><text y='385' font-size='380' fill='white' text-anchor='middle' x='256'>❤️</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%23f081cc' width='540' height='360'/><rect fill='%23fbcfe8' width='540' height='360' y='360'/><text y='200' font-size='80' fill='white' text-anchor='middle' x='270'>❤️</text><text y='450' font-size='60' fill='%23f43f5e' text-anchor='middle' x='270'>Zimbabwe</text></svg>",
+      "sizes": "540x720",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["dating", "lifestyle", "social"],
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Browse Profiles",
+      "short_name": "Browse",
+      "description": "Start browsing Christian profiles",
+      "url": "/?action=browse",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect fill='%23f43f5e' width='96' height='96' rx='20'/><text y='72' font-size='60' fill='white' text-anchor='middle' x='48'>👥</text></svg>",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Diaspora Connect",
+      "short_name": "Diaspora",
+      "description": "Connect diaspora men with Zimbabwean women",
+      "url": "/?action=diaspora",
+      "icons": [
+        {
+          "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect fill='%230ea5e9' width='96' height='96' rx='20'/><text y='72' font-size='60' fill='white' text-anchor='middle' x='48'>🌍</text></svg>",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

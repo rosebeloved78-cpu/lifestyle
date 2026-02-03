@@ -1,0 +1,55 @@
+=====================================================
+LIFESTYLE CONNECT - VERCEL DEPLOYMENT
+=====================================================
+
+YOUR GITHUB ACCOUNT:
+Username: rosebeloved78-cpu
+Email: rosebeloved78@gmail.com
+
+YOUR GITHUB REPOSITORY (I CREATED THIS FOR YOU):
+https://github.com/rosebeloved78-cpu/lifestyle-connect
+
+=====================================================
+DEPLOY TO VERCEL - FOLLOW THESE STEPS EXACTLY
+=====================================================
+
+STEP 1: Go to Vercel
+- Open browser
+- Type: https://vercel.com
+- Click "Sign Up"
+
+STEP 2: Sign Up with GitHub
+- Click "Continue with GitHub"
+- It will ask to connect to your GitHub account
+- Log in with: rosebeloved78-cpu
+- Click "Authorize"
+
+STEP 3: Import Your Project
+- You'll see a page to import
+- Click "Import Project"
+- Paste this link:
+  https://github.com/rosebeloved78-cpu/lifestyle-connect
+- Click "Continue"
+
+STEP 4: Configure Project
+- You'll see project settings
+- Just click "Deploy" (don't change anything)
+- Wait 2-3 minutes
+
+STEP 5: Done!
+- Your app will be live!
+- You'll get a link like:
+  https://lifestyle-connect.vercel.app
+
+=====================================================
+THAT'S IT!
+=====================================================
+
+Once deployed, you can:
+- Share the link with anyone
+- People can use your dating app
+- It works on all devices
+
+YOUR APP WILL BE LIVE!
+
+For any issues, just tell me the exact error message you see.

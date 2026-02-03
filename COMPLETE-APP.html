@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifestyle Connect - Zimbabwe Dating Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-rose-400 via-rose-200 to-rose-100">
+
+<div id="app"></div>
+
+<script>
+    // Simple state management
+    let currentPage = 'home';
+    let userProfile = null;
+    let mobileMenuOpen = false;
+
+    // Mock data for profiles
+    const mockProfiles = [
+        {
+            id: 1,
+            name: 'Grace',
+            age: 26,
+            churchName: 'Mount of Olives Worship Centre',
+            churchAttendance: 'attend',
+            serviceDepartment: 'Choir',
+            serviceRole: 'serve',
+            bio: 'Passionate about worship and community service. Love hiking and cooking.',
+            photo: '👩‍🦰',
+        },
+        {
+            id: 2,
+            name: 'Faith',
+            age: 24,
+            churchName: 'Harvest Chapel International',
+            churchAttendance: 'attend',
+            serviceDepartment: 'Deaconry',
+            serviceRole: 'serve',
+            bio: 'Social worker with a heart for helping others. Enjoy reading and prayer.',
+            photo: '👩',
+        },
+        {
+            id: 3,
+            name: 'Blessing',
+            age: 28,
+            churchName: 'Living Water Church',
+            churchAttendance: 'home',
+            bio: 'Dedicated to personal growth and faith. Love nature and good conversation.',
+            photo: '👩‍🦱',
+        },
+    ];
+
+    const womenProfiles = [
+        {
+            id: 1,
+            name: 'Nomsa',
+            age: 27,
+            location: 'Harare',
+            churchName: 'Mount of Olives',
+            churchAttendance: 'attend',
+            bio: 'Teacher with passion for education and community work.',
+            vetted: false,
+            photo: '👩‍🏫',
+        },
+        {
+            id: 2,
+            name: 'Thandeka',
+            age: 25,
+            location: 'Bulawayo',
+            churchName: 'Living Water Church',
+            churchAttendance: 'attend',
+            bio: 'Healthcare professional caring for others.',
+            vetted: true,
+            photo: '👩‍⚕️',
+        },
+        {
+            id: 3,
+            name: 'Sibongile',
+            age: 29,
+            location: 'Harare',
+            churchName: 'Harvest Chapel',
+            churchAttendance: 'attend',
+            bio: 'Entrepreneur and philanthropist.',
+            vetted: false,
+            photo: '👩‍💼',
+        },
+    ];
+
+    function navigateTo(page) {
+        currentPage = page;
+        mobileMenuOpen = false;
+        render();
+    }
+
+    function renderNav() {
+        return `
+            <nav class="bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg sticky top-0 z-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center h-16">
+                        <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('home')">
+                            <span class="text-2xl">❤️</span>
+                            <span class="text-2xl font-bold">Lifestyle Connect</span>
+                        </div>
+                        <div class="hidden md:flex gap-8">
+                            <button onclick="navigateTo('home')" class="hover:text-rose-100 transition">Home</button>
+                            <button onclick="navigateTo('signup')" class="hover:text-rose-100 transition">Sign Up</button>
+                            ${userProfile ? `
+                                <button onclick="navigateTo('dashboard')" class="hover:text-rose-100 transition">Dashboard</button>
+                                <button onclick="navigateTo('diaspora')" class="hover:text-rose-100 transition">Diaspora</button>
+                            ` : ''}
+                        </div>
+                        <button class="md:hidden" onclick="toggleMobileMenu()">☰</button>
+                    </div>
+                    ${mobileMenuOpen ? `
+                        <div class="md:hidden pb-4 border-t border-rose-400">
+                            <button onclick="navigateTo('home')" class="block w-full text-left py-2 hover:text-rose-100">Home</button>
+                            <button onclick="navigateTo('signup')" class="block w-full text-left py-2 hover:text-rose-100">Sign Up</button>
+                            ${userProfile ? `
+                                <button onclick="navigateTo('dashboard')" class="block w-full text-left py-2 hover:text-rose-100">Dashboard</button>
+                                <button onclick="navigateTo('diaspora')" class="block w-full text-left py-2 hover:text-rose-100">Diaspora</button>
+                            ` : ''}
+                        </div>
+                    ` : ''}
+                </div>
+            </nav>
+        `;
+    }
+
+    function renderHome() {
+        return `
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="text-center mb-20">
+                    <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+                        Connect with Faith, Connect with Purpose
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                        Lifestyle Connect is Zimbabwe's premier Christian dating and lifestyle platform. 
+                        Meet meaningful connections with shared values and faith.
+                    </p>
+                    <button onclick="navigateTo('signup')" class="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-lg transition">
+                        Get Started Free
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="text-4xl mb-4">❤️</div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Faith-Based Matching</h3>
+                        <p class="text-gray-600">Connect based on church attendance, service roles, and shared Christian values.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="text-4xl mb-4">📹</div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Video Calls & Messaging</h3>
+                        <p class="text-gray-600">Safely connect with video calls and instant messaging on our secure platform.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="text-4xl mb-4">🔒</div>
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Safe & Secure</h3>
+                        <p class="text-gray-600">Your privacy and safety are our top priority. All profiles are verified.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-12 mb-20">
+                    <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Why Choose Lifestyle Connect?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="flex gap-4">
+                            <span class="text-2xl flex-shrink-0">👥</span>
+                            <div>
+                                <h3 class="font-bold mb-2 text-gray-800">Zimbabwe Community</h3>
+                                <p class="text-gray-600">Connect only with members living in Zimbabwe.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-2xl flex-shrink-0">🏆</span>
+                            <div>
+                                <h3 class="font-bold mb-2 text-gray-800">Church-Based Network</h3>
+                                <p class="text-gray-600">Filter matches by your church for deeper connections.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-2xl flex-shrink-0">🌍</span>
+                            <div>
+                                <h3 class="font-bold mb-2 text-gray-800">Diaspora Connect</h3>
+                                <p class="text-gray-600">For Zimbabweans abroad looking for connections back home.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="text-2xl flex-shrink-0">💕</span>
+                            <div>
+                                <h3 class="font-bold mb-2 text-gray-800">Meaningful Relationships</h3>
+                                <p class="text-gray-600">Built on shared faith and values, not just swiping.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20">
+                    <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Simple Pricing</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                            <div class="bg-gray-100 p-6">
+                                <h3 class="text-2xl font-bold text-gray-800">Free</h3>
+                                <p class="text-4xl font-bold text-rose-500 mt-2">$0</p>
+                            </div>
+                            <div class="p-6">
+                                <ul class="space-y-4">
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-green-500">✓</span>
+                                        <span class="text-gray-600">Create profile</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-green-500">✓</span>
+                                        <span class="text-gray-600">Browse profiles</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-green-500">✓</span>
+                                        <span class="text-gray-600">Limited messaging</span>
+                                    </li>
+                                </ul>
+                                <button class="w-full mt-6 bg-gray-200 text-gray-800 py-2 rounded font-bold">Current</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden border-2 border-rose-500">
+                            <div class="bg-gradient-to-r from-rose-500 to-pink-500 text-white p-6">
+                                <h3 class="text-2xl font-bold">Premium</h3>
+                                <p class="text-4xl font-bold mt-2">$9.99</p>
+                                <p class="text-sm mt-2">per month</p>
+                            </div>
+                            <div class="p-6">
+                                <ul class="space-y-4">
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-green-500">✓</span>
+                                        <span class="text-gray-600">All Free features</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-green-500">✓</span>
+                                        <span class="text-gray-600">Unlimited messaging</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-green-500">✓</span>
+                                        <span class="text-gray-600">Same church filter</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-green-500">✓</span>
+                                        <span class="text-gray-600">Video calls</span>
+                                    </li>
+                                </ul>
+                                <button class="w-full mt-6 bg-gradient-to-r from-rose-500 to-pink-500 text-white py-2 rounded font-bold">Upgrade</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                            <div class="bg-yellow-100 p-6">
+                                <h3 class="text-2xl font-bold text-gray-800">VIP</h3>
+                                <p class="text-4xl font-bold text-yellow-600 mt-2">$29.99</p>
+                                <p class="text-sm text-gray-600 mt-2">per month</p>
+                            </div>
+                            <div class="p-6">
+                                <ul class="space-y-4">
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-green-500">✓</span>
+                                        <span class="text-gray-600">All Premium features</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-green-500">✓</span>
+                                        <span class="text-gray-600">Verified badge</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-green-500">✓</span>
+                                        <span class="text-gray-600">Priority support</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <span class="text-green-500">✓</span>
+                                        <span class="text-gray-600">Featured profile</span>
+                                    </li>
+                                </ul>
+                                <button class="w-full mt-6 bg-yellow-600 text-white py-2 rounded font-bold">Go VIP</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-lg shadow-lg p-12 text-center">
+                    <h2 class="text-3xl font-bold mb-4">Ready to Find Your Match?</h2>
+                    <p class="text-lg mb-8">Join thousands of Zimbabweans looking for meaningful connections.</p>
+                    <button onclick="navigateTo('signup')" class="bg-white text-rose-600 px-8 py-3 rounded-lg font-bold">
+                        Sign Up Free
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderSignUp() {
+        return `
+            <div class="max-w-2xl mx-auto px-4 py-16">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-8">Create Your Account</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Full Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-rose-500" placeholder="Your full name">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-rose-500" placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Password</label>
+                            <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-rose-500" placeholder="••••••">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Age</label>
+                                <input type="number" id="age" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-rose-500" placeholder="25">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Gender</label>
+                                <select id="gender" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-rose-500">
+                                    <option value="">Select</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Church Attendance</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-rose-50">
+                                    <input type="radio" name="churchAttendance" value="attend" class="w-4 h-4 text-rose-500">
+                                    <span class="ml-3 text-gray-700 font-semibold">I attend church regularly</span>
+                                </label>
+                                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-rose-50">
+                                    <input type="radio" name="churchAttendance" value="home" class="w-4 h-4 text-rose-500">
+                                    <span class="ml-3 text-gray-700 font-semibold">I pray from home</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div id="churchNameDiv" style="display: none;">
+                            <label class="block text-gray-700 font-semibold mb-2">Church Name</label>
+                            <input type="text" id="churchName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-rose-500" placeholder="e.g., Mount of Olives Worship Centre">
+                        </div>
+                        <div id="serviceRoleDiv" style="display: none;">
+                            <label class="block text-gray-700 font-semibold mb-2">Church Involvement</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-rose-50">
+                                    <input type="radio" name="serviceRole" value="serve" class="w-4 h-4 text-rose-500">
+                                    <span class="ml-3 text-gray-700 font-semibold">I serve in a department</span>
+                                </label>
+                                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-rose-50">
+                                    <input type="radio" name="serviceRole" value="member" class="w-4 h-4 text-rose-500">
+                                    <span class="ml-3 text-gray-700 font-semibold">I am a member</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div id="serviceDepartmentDiv" style="display: none;">
+                            <label class="block text-gray-700 font-semibold mb-2">Service Department</label>
+                            <input type="text" id="serviceDepartment" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-rose-500" placeholder="e.g., Usher, Deaconry, Choir, Pastor">
+                        </div>
+                        <div id="diasporaDiv" style="display: none;">
+                            <label class="block text-gray-700 font-semibold mb-4">Diaspora Connect Option</label>
+                            <p class="text-gray-600 mb-4">Would you like to be visible to Zimbabwean men in the diaspora?</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-rose-50">
+                                    <input type="radio" name="diasporaOptIn" value="yes" class="w-4 h-4 text-rose-500">
+                                    <span class="ml-3 text-gray-700 font-semibold">Yes, add me to Diaspora Connect</span>
+                                </label>
+                                <label class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-rose-50">
+                                    <input type="radio" name="diasporaOptIn" value="no" class="w-4 h-4 text-rose-500">
+                                    <span class="ml-3 text-gray-700 font-semibold">No, keep me off Diaspora Connect</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">About You</label>
+                            <textarea id="bio" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-rose-500 h-24" placeholder="Tell us about yourself..."></textarea>
+                        </div>
+                        <button onclick="completeSignUp()" class="w-full px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-lg font-bold hover:shadow-lg transition">
+                            Complete Sign Up
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderDashboard() {
+        const currentProfile = mockProfiles[0];
+        return `
+            <div class="max-w-7xl mx-auto px-4 py-8">
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <div class="lg:col-span-1">
+                        <div class="bg-white rounded-lg shadow-lg p-6 sticky top-20">
+                            <div class="text-center mb-6">
+                                <div class="text-6xl mb-4">${userProfile.gender === 'male' ? '👨' : '👩'}</div>
+                                <h2 class="text-2xl font-bold text-gray-800">${userProfile.name}</h2>
+                                <p class="text-gray-600">${userProfile.age} years old</p>
+                            </div>
+                            ${userProfile.churchAttendance === 'attend' ? `
+                                <div class="mb-4 p-4 bg-rose-50 rounded-lg border border-rose-200">
+                                    <p class="text-sm font-semibold text-gray-700">⛪ ${userProfile.churchName}</p>
+                                    <p class="text-xs text-gray-600 mt-1">${userProfile.serviceRole === 'serve' ? 'Serves: ' + userProfile.serviceDepartment : 'Member'}</p>
+                                </div>
+                            ` : ''}
+                            <div class="mb-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <p class="text-sm font-semibold text-blue-900">🎁 Free Tier</p>
+                            </div>
+                            ${userProfile.gender === 'female' && userProfile.churchAttendance === 'attend' ? `
+                                <div class="mb-4 p-4 bg-purple-50 rounded-lg border border-purple-200">
+                                    <p class="text-xs font-semibold text-gray-600 mb-2">DIASPORA CONNECT</p>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="checkbox" class="w-4 h-4 text-purple-600" ${userProfile.diasporaOptIn ? 'checked' : ''}>
+                                        <span class="text-sm text-gray-700">Visible to diaspora men</span>
+                                    </label>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                            <div class="text-center py-16 bg-gradient-to-b from-rose-100 to-pink-100">
+                                <div class="text-8xl mb-4">${currentProfile.photo}</div>
+                            </div>
+                            <div class="p-8">
+                                <h3 class="text-3xl font-bold text-gray-800 mb-2">${currentProfile.name}, ${currentProfile.age}</h3>
+                                ${currentProfile.churchAttendance === 'attend' ? `
+                                    <p class="text-gray-600 mb-4 flex items-center gap-2">
+                                        <span>⛪</span>
+                                        <span class="font-semibold">${currentProfile.churchName}</span>
+                                    </p>
+                                ` : ''}
+                                ${currentProfile.serviceRole === 'serve' ? `
+                                    <p class="text-gray-600 mb-4 text-sm">Serves: ${currentProfile.serviceDepartment}</p>
+                                ` : ''}
+                                <p class="text-gray-600 mb-8">${currentProfile.bio}</p>
+                                <div class="flex gap-4">
+                                    <button class="flex-1 px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg font-bold hover:bg-gray-50">Pass</button>
+                                    <button class="flex-1 px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-lg font-bold">Like ❤️</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function renderDiaspora() {
+        return `
+            <div class="max-w-7xl mx-auto px-4 py-16">
+                <div class="text-center mb-16">
+                    <h1 class="text-5xl font-bold text-gray-800 mb-4">Diaspora Connect</h1>
+                    <p class="text-xl text-gray-600">Connect Zimbabweans across borders</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-8">
+                            <h2 class="text-3xl font-bold mb-4">For Zimbabwean Men</h2>
+                            <p class="text-lg">Looking for connections back home?</p>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-lg font-bold text-gray-800 mb-4">Our Plans:</h3>
+                            <div class="space-y-4 mb-8">
+                                <div class="border border-blue-200 rounded-lg p-4">
+                                    <p class="font-bold text-gray-800 mb-2">Basic Plan - $20/month</p>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>✓ Browse profiles</li>
+                                        <li>✓ Video calls</li>
+                                        <li>✓ Messaging</li>
+                                    </ul>
+                                </div>
+                                <div class="border border-blue-200 rounded-lg p-4">
+                                    <p class="font-bold text-gray-800 mb-2">Vetted Plan - $50/month</p>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>✓ All Basic features</li>
+                                        <li>✓ Vetted women only</li>
+                                        <li>✓ Face-to-face verified</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <button class="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-bold">I'm a Man</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                        <div class="bg-gradient-to-r from-rose-500 to-pink-500 text-white p-8">
+                            <h2 class="text-3xl font-bold mb-4">For Zimbabwean Women</h2>
+                            <p class="text-lg">Meet men looking for genuine connections</p>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-lg font-bold text-gray-800 mb-4">Your Benefits:</h3>
+                            <div class="space-y-4 mb-8">
+                                <div class="border border-rose-200 rounded-lg p-4">
+                                    <p class="font-bold text-gray-800 mb-2">FREE Membership</p>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>✓ Create profile</li>
+                                        <li>✓ Receive messages</li>
+                                        <li>✓ Video calls</li>
+                                    </ul>
+                                </div>
+                                <div class="border border-rose-200 rounded-lg p-4">
+                                    <p class="font-bold text-gray-800 mb-2">Optional Vetting</p>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>✓ Harare: $100</li>
+                                        <li>✓ Outside Harare: $200</li>
+                                        <li>✓ Face-to-face verification</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <button class="w-full px-6 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white rounded-lg font-bold">I'm a Woman</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    ${womenProfiles.map(woman => `
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                            <div class="text-center py-12 bg-gradient-to-b from-rose-100 to-pink-100">
+                                <div class="text-6xl mb-4">${woman.photo}</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">${woman.name}, ${woman.age}</h3>
+                                <p class="text-gray-600 flex items-center gap-1 mb-4">📍 ${woman.location}</p>
+                                ${woman.vetted ? '<div class="mb-4 p-2 bg-green-50 border border-green-200 rounded text-sm font-semibold text-green-700">✓ Verified</div>' : ''}
+                                <p class="text-gray-600 text-sm mb-6">${woman.bio}</p>
+                                <button class="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50">📹 Call</button>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    function renderFooter() {
+        return `
+            <footer class="bg-gray-800 text-white py-8 mt-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                        <div>
+                            <h3 class="text-lg font-bold mb-4">❤️ Lifestyle Connect</h3>
+                            <p class="text-gray-300">Connect with faith, connect with purpose.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-4">Quick Links</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li><button onclick="navigateTo('home')" class="hover:text-white">Home</button></li>
+                                <li><button onclick="navigateTo('signup')" class="hover:text-white">Sign Up</button></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-4">Location</h4>
+                            <p class="text-gray-300">📍 Zimbabwe</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-4">Support</h4>
+                            <p class="text-gray-300">support@lifestyleconnect.zw</p>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-700 pt-8 text-center text-gray-300">
+                        <p>&copy; 2024 Lifestyle Connect. All rights reserved. Zimbabwe only.</p>
+                    </div>
+                </div>
+            </footer>
+        `;
+    }
+
+    function completeSignUp() {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const age = document.getElementById('age').value;
+        const gender = document.getElementById('gender').value;
+        const churchAttendance = document.querySelector('input[name="churchAttendance"]:checked')?.value;
+        const churchName = document.getElementById('churchName').value;
+        const serviceRole = document.querySelector('input[name="serviceRole"]:checked')?.value;
+        const serviceDepartment = document.getElementById('serviceDepartment').value;
+        const diasporaOptIn = document.querySelector('input[name="diasporaOptIn"]:checked')?.value === 'yes';
+        const bio = document.getElementById('bio').value;
+
+        if (!name || !email || !age || !gender || !churchAttendance || !bio) {
+            alert('Please fill all required fields');
+            return;
+        }
+
+        if (churchAttendance === 'attend' && !churchName) {
+            alert('Please enter your church name');
+            return;
+        }
+
+        userProfile = {
+            name,
+            email,
+            age,
+            gender,
+            churchAttendance,
+            churchName,
+            serviceRole,
+            serviceDepartment,
+            diasporaOptIn,
+            bio,
+            subscription: 'free',
+            joinDate: new Date().toLocaleDateString(),
+        };
+
+        navigateTo('dashboard');
+    }
+
+    function toggleMobileMenu() {
+        mobileMenuOpen = !mobileMenuOpen;
+        render();
+    }
+
+    function render() {
+        let mainContent = '';
+        switch (currentPage) {
+            case 'home':
+                mainContent = renderHome();
+                break;
+            case 'signup':
+                mainContent = renderSignUp();
+                break;
+            case 'dashboard':
+                mainContent = userProfile ? renderDashboard() : renderHome();
+                break;
+            case 'diaspora':
+                mainContent = renderDiaspora();
+                break;
+            default:
+                mainContent = renderHome();
+        }
+
+        document.getElementById('app').innerHTML = `
+            ${renderNav()}
+            <main class="min-h-[calc(100vh-64px)]">
+                ${mainContent}
+            </main>
+            ${renderFooter()}
+        `;
+    }
+
+    // Initial render
+    render();
+</script>
+
+</body>
+</html>

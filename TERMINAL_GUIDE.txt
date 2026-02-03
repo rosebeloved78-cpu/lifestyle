@@ -1,0 +1,146 @@
+================================================================================
+                        TERMINAL GUIDE FOR BEGINNERS
+================================================================================
+
+WHAT IS A TERMINAL?
+A terminal (or command prompt) is a text-based way to give your computer 
+instructions. Instead of clicking buttons, you type commands.
+
+================================================================================
+STEP 1: OPEN YOUR TERMINAL
+================================================================================
+
+WINDOWS USERS:
+1. Press: Windows Key + R
+2. Type: cmd
+3. Press: Enter
+4. You'll see a BLACK WINDOW appear
+5. That's your terminal!
+
+MAC USERS:
+1. Press: Command + Space
+2. Type: terminal
+3. Press: Enter
+4. You'll see a BLACK/WHITE WINDOW appear
+5. That's your terminal!
+
+LINUX USERS:
+1. Right-click on desktop
+2. Click: "Open Terminal Here"
+3. You'll see a terminal window appear
+4. That's your terminal!
+
+================================================================================
+STEP 2: GO TO YOUR PROJECT FOLDER
+================================================================================
+
+In your terminal, type this command:
+
+WINDOWS:
+cd C:\Users\YourName\Desktop\lifestyle-connect
+
+Replace "YourName" with your actual Windows username!
+Replace "lifestyle-connect" with your actual folder name!
+
+MAC/LINUX:
+cd ~/Desktop/lifestyle-connect
+
+Replace "lifestyle-connect" with your actual folder name!
+
+After typing, press ENTER.
+
+================================================================================
+STEP 3: NOW YOU'RE IN YOUR PROJECT!
+================================================================================
+
+Your terminal should now show something like:
+C:\Users\YourName\Desktop\lifestyle-connect>
+
+This means you're in the right place!
+
+================================================================================
+STEP 4: COPY AND PASTE COMMANDS
+================================================================================
+
+When you see a command to run, here's what to do:
+
+EXAMPLE COMMAND:
+npm install
+
+HERE'S HOW TO RUN IT:
+
+1. COPY the command (Ctrl+C if it's highlighted)
+2. RIGHT-CLICK in your terminal window
+3. Click PASTE (or press Ctrl+Shift+V)
+4. Press ENTER
+
+That's it! The command will run.
+
+================================================================================
+USEFUL TERMINAL COMMANDS
+================================================================================
+
+pwd
+  - Shows where you are right now
+
+ls (Mac/Linux) or dir (Windows)
+  - Shows files in your current folder
+
+cd [folder-name]
+  - Goes into a folder
+
+cd ..
+  - Goes back one folder
+
+clear (Mac/Linux) or cls (Windows)
+  - Clears the screen
+
+exit
+  - Closes the terminal
+
+================================================================================
+COMMANDS YOU'LL USE FOR THIS PROJECT
+================================================================================
+
+1. FIRST TIME SETUP:
+   npm install
+   
+   This downloads everything your app needs.
+   It may take 2-3 minutes.
+
+2. BUILD THE APP:
+   npm run build
+   
+   This creates your final app ready to share.
+
+3. TEST LOCALLY:
+   npm run dev
+   
+   This lets you see your app at localhost:5173
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+ERROR: "npm: command not found"
+SOLUTION: Install Node.js from https://nodejs.org
+
+ERROR: "No such file or directory"
+SOLUTION: Make sure you typed the folder path correctly
+
+ERROR: Permission denied
+SOLUTION: Try: sudo npm install (on Mac/Linux)
+
+NEED HELP?
+Just tell me what error message you see!
+
+================================================================================
+THAT'S IT!
+================================================================================
+
+You now know how to use the terminal!
+It's just typing commands and pressing Enter.
+
+Next: Follow the QUICK_START.md guide for deployment steps!
+
+================================================================================

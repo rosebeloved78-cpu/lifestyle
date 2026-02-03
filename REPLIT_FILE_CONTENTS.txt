@@ -1,0 +1,1307 @@
+================================================================================
+LIFESTYLE CONNECT - EXACT FILE CONTENTS FOR REPLIT
+================================================================================
+
+Copy-paste these exact contents into each file in Replit.
+
+DO NOT add or remove anything - just copy and paste exactly as shown!
+
+================================================================================
+FILE 1: index.html (in root folder)
+================================================================================
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lifestyle Connect - A faith-based dating platform for Zimbabweans" />
+    <meta name="theme-color" content="#ec4899" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>Lifestyle Connect</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js');
+        });
+      }
+    </script>
+  </body>
+</html>
+
+================================================================================
+FILE 2: src/main.tsx
+================================================================================
+
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import './main.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+
+================================================================================
+FILE 3: src/main.css
+================================================================================
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #be185d 0%, #ec4899 50%, #fbcfe8 100%);
+}
+
+================================================================================
+FILE 4: src/App.tsx
+================================================================================
+
+import { useState } from 'react'
+import Home from './pages/Home'
+import SignUp from './pages/SignUp'
+import Dashboard from './pages/Dashboard'
+import DiasporaConnect from './pages/DiasporaConnect'
+
+export default function App() {
+  const [currentPage, setCurrentPage] = useState('home')
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <Home onNavigate={setCurrentPage} />
+      case 'signup':
+        return <SignUp onNavigate={setCurrentPage} />
+      case 'dashboard':
+        return <Dashboard onNavigate={setCurrentPage} />
+      case 'diaspora':
+        return <DiasporaConnect onNavigate={setCurrentPage} />
+      default:
+        return <Home onNavigate={setCurrentPage} />
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-rose-900 via-pink-600 to-pink-100">
+      <div className="fixed top-4 right-4 z-50">
+        <button
+          onClick={() => setCurrentPage('home')}
+          className="px-4 py-2 bg-white text-pink-900 rounded-lg font-semibold hover:bg-pink-100 transition"
+        >
+          📑 Navigate Pages
+        </button>
+        {currentPage !== 'home' && (
+          <div className="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-4 w-48 space-y-2">
+            <button
+              onClick={() => setCurrentPage('home')}
+              className="block w-full text-left px-4 py-2 hover:bg-pink-100 rounded"
+            >
+              🏠 Home
+            </button>
+            <button
+              onClick={() => setCurrentPage('signup')}
+              className="block w-full text-left px-4 py-2 hover:bg-pink-100 rounded"
+            >
+              📝 Sign Up
+            </button>
+            <button
+              onClick={() => setCurrentPage('dashboard')}
+              className="block w-full text-left px-4 py-2 hover:bg-pink-100 rounded"
+            >
+              💖 Dashboard
+            </button>
+            <button
+              onClick={() => setCurrentPage('diaspora')}
+              className="block w-full text-left px-4 py-2 hover:bg-pink-100 rounded"
+            >
+              🌍 Diaspora Connect
+            </button>
+          </div>
+        )}
+      </div>
+      {renderPage()}
+    </div>
+  )
+}
+
+================================================================================
+FILE 5: src/pages/Home.tsx
+================================================================================
+
+import { Heart, Users, Globe, Shield, MessageCircle, Zap } from 'lucide-react'
+
+export default function Home({ onNavigate }: { onNavigate: (page: string) => void }) {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-rose-900 via-pink-600 to-pink-100">
+      {/* Navigation */}
+      <nav className="bg-white bg-opacity-10 backdrop-blur-md text-white p-4">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          <div className="text-2xl font-bold">💖 Lifestyle Connect</div>
+          <div className="space-x-4">
+            <button
+              onClick={() => onNavigate('signup')}
+              className="px-6 py-2 bg-pink-500 rounded-lg hover:bg-pink-600 transition font-semibold"
+            >
+              Sign Up
+            </button>
+            <button
+              onClick={() => onNavigate('dashboard')}
+              className="px-6 py-2 bg-white text-pink-900 rounded-lg hover:bg-pink-100 transition font-semibold"
+            >
+              Browse
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="max-w-6xl mx-auto px-4 py-20">
+        <div className="text-center text-white mb-20">
+          <h1 className="text-5xl font-bold mb-4">Find Your Faith-Based Connection</h1>
+          <p className="text-xl mb-8 opacity-90">Lifestyle Connect - Where Zimbabwe's Christians Find Love</p>
+          <div className="space-x-4">
+            <button
+              onClick={() => onNavigate('signup')}
+              className="px-8 py-3 bg-white text-pink-900 rounded-lg font-bold hover:bg-pink-100 transition inline-block"
+            >
+              Get Started Free
+            </button>
+            <button
+              onClick={() => onNavigate('diaspora')}
+              className="px-8 py-3 bg-pink-600 text-white rounded-lg font-bold hover:bg-pink-700 transition inline-block"
+            >
+              Diaspora Connect →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="bg-white bg-opacity-10 backdrop-blur-md text-white py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold mb-12 text-center">Why Choose Lifestyle Connect?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white bg-opacity-10 p-6 rounded-lg">
+              <Shield className="w-12 h-12 mb-4" />
+              <h3 className="font-bold text-xl mb-2">Faith-Based Matching</h3>
+              <p>Connect with Christians who share your church and values</p>
+            </div>
+            <div className="bg-white bg-opacity-10 p-6 rounded-lg">
+              <Users className="w-12 h-12 mb-4" />
+              <h3 className="font-bold text-xl mb-2">Same Church Filter</h3>
+              <p>Premium members can connect with people from their church</p>
+            </div>
+            <div className="bg-white bg-opacity-10 p-6 rounded-lg">
+              <Globe className="w-12 h-12 mb-4" />
+              <h3 className="font-bold text-xl mb-2">Diaspora Connect</h3>
+              <p>Special program for Zimbabweans abroad</p>
+            </div>
+            <div className="bg-white bg-opacity-10 p-6 rounded-lg">
+              <MessageCircle className="w-12 h-12 mb-4" />
+              <h3 className="font-bold text-xl mb-2">Real Connections</h3>
+              <p>Verified profiles and video calling</p>
+            </div>
+            <div className="bg-white bg-opacity-10 p-6 rounded-lg">
+              <Heart className="w-12 h-12 mb-4" />
+              <h3 className="font-bold text-xl mb-2">Safe & Secure</h3>
+              <p>Your privacy and security are our priority</p>
+            </div>
+            <div className="bg-white bg-opacity-10 p-6 rounded-lg">
+              <Zap className="w-12 h-12 mb-4" />
+              <h3 className="font-bold text-xl mb-2">Quick Setup</h3>
+              <p>Get started in minutes with our simple process</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <h2 className="text-3xl font-bold text-white mb-12 text-center">Our Pricing Plans</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-white rounded-lg p-8 text-center">
+            <h3 className="text-2xl font-bold text-pink-900 mb-4">Free</h3>
+            <p className="text-4xl font-bold text-pink-600 mb-4">$0<span className="text-lg">/mo</span></p>
+            <ul className="text-left space-y-3 mb-6 text-gray-700">
+              <li>✓ Create profile</li>
+              <li>✓ Browse profiles</li>
+              <li>✓ Like & pass</li>
+              <li>✗ Same church filter</li>
+              <li>✗ Messaging</li>
+            </ul>
+            <button
+              onClick={() => onNavigate('signup')}
+              className="w-full px-6 py-3 bg-pink-600 text-white rounded-lg font-bold hover:bg-pink-700 transition"
+            >
+              Get Started
+            </button>
+          </div>
+
+          <div className="bg-white rounded-lg p-8 text-center border-4 border-pink-600 transform scale-105">
+            <div className="bg-pink-600 text-white px-4 py-1 rounded-full inline-block mb-4">Popular</div>
+            <h3 className="text-2xl font-bold text-pink-900 mb-4">Premium</h3>
+            <p className="text-4xl font-bold text-pink-600 mb-4">$9.99<span className="text-lg">/mo</span></p>
+            <ul className="text-left space-y-3 mb-6 text-gray-700">
+              <li>✓ Everything in Free</li>
+              <li>✓ Same church filter</li>
+              <li>✓ Messaging</li>
+              <li>✓ Video calls</li>
+              <li>✗ Verified badge</li>
+            </ul>
+            <button
+              onClick={() => onNavigate('signup')}
+              className="w-full px-6 py-3 bg-pink-600 text-white rounded-lg font-bold hover:bg-pink-700 transition"
+            >
+              Upgrade Now
+            </button>
+          </div>
+
+          <div className="bg-white rounded-lg p-8 text-center">
+            <h3 className="text-2xl font-bold text-pink-900 mb-4">VIP</h3>
+            <p className="text-4xl font-bold text-pink-600 mb-4">$29.99<span className="text-lg">/mo</span></p>
+            <ul className="text-left space-y-3 mb-6 text-gray-700">
+              <li>✓ Everything in Premium</li>
+              <li>✓ Verified badge</li>
+              <li>✓ Priority support</li>
+              <li>✓ Highlighted profile</li>
+              <li>✓ Unlimited messaging</li>
+            </ul>
+            <button
+              onClick={() => onNavigate('signup')}
+              className="w-full px-6 py-3 bg-pink-600 text-white rounded-lg font-bold hover:bg-pink-700 transition"
+            >
+              Get VIP
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-white bg-opacity-10 backdrop-blur-md text-white py-16">
+        <div className="max-w-4xl mx-auto text-center px-4">
+          <h2 className="text-3xl font-bold mb-4">Ready to Find Your Match?</h2>
+          <p className="text-xl mb-8 opacity-90">Join thousands of Zimbabwean Christians looking for meaningful connections</p>
+          <button
+            onClick={() => onNavigate('signup')}
+            className="px-8 py-4 bg-white text-pink-900 rounded-lg font-bold text-lg hover:bg-pink-100 transition"
+          >
+            Start Your Journey Today
+          </button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black bg-opacity-30 text-white py-8 text-center">
+        <p>&copy; 2024 Lifestyle Connect. For Zimbabweans, By Zimbabweans. 🇿🇼</p>
+      </footer>
+    </div>
+  )
+}
+
+================================================================================
+FILE 6: src/pages/SignUp.tsx
+================================================================================
+
+import { useState } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+
+export default function SignUp({ onNavigate }: { onNavigate: (page: string) => void }) {
+  const [step, setStep] = useState(1)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    age: '',
+    gender: '',
+    churchAttendance: '',
+    churchName: '',
+    churchRole: '',
+    department: '',
+    bio: '',
+    joinDiasporaConnect: '',
+  })
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData({ ...formData, [field]: value })
+  }
+
+  const handleNext = () => {
+    if (step === 2 && formData.churchAttendance === 'home') {
+      setStep(4)
+    } else if (step === 4 && formData.churchRole === 'member') {
+      setStep === 5 ? setStep(6) : setStep(5)
+    } else {
+      setStep(step + 1)
+    }
+  }
+
+  const handleBack = () => {
+    if (step === 4 && formData.churchAttendance === 'home') {
+      setStep(2)
+    } else {
+      setStep(step - 1)
+    }
+  }
+
+  const handleSubmit = () => {
+    alert('Profile created! ' + JSON.stringify(formData, null, 2))
+    onNavigate('dashboard')
+  }
+
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return (
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Create Your Account</h2>
+            <div>
+              <label className="block font-semibold mb-2">Full Name</label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => handleInputChange('name', e.target.value)}
+                placeholder="Your full name"
+                className="w-full px-4 py-2 border border-pink-300 rounded-lg focus:outline-none focus:border-pink-500"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold mb-2">Email</label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => handleInputChange('email', e.target.value)}
+                placeholder="your@email.com"
+                className="w-full px-4 py-2 border border-pink-300 rounded-lg focus:outline-none focus:border-pink-500"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold mb-2">Password</label>
+              <input
+                type="password"
+                value={formData.password}
+                onChange={(e) => handleInputChange('password', e.target.value)}
+                placeholder="Create a strong password"
+                className="w-full px-4 py-2 border border-pink-300 rounded-lg focus:outline-none focus:border-pink-500"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold mb-2">Age</label>
+              <input
+                type="number"
+                value={formData.age}
+                onChange={(e) => handleInputChange('age', e.target.value)}
+                placeholder="Your age"
+                className="w-full px-4 py-2 border border-pink-300 rounded-lg focus:outline-none focus:border-pink-500"
+              />
+            </div>
+            <div>
+              <label className="block font-semibold mb-2">Gender</label>
+              <select
+                value={formData.gender}
+                onChange={(e) => handleInputChange('gender', e.target.value)}
+                className="w-full px-4 py-2 border border-pink-300 rounded-lg focus:outline-none focus:border-pink-500"
+              >
+                <option value="">Select your gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+          </div>
+        )
+
+      case 2:
+        return (
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Tell Us About Your Faith</h2>
+            <p className="text-gray-600">Do you attend church or pray from home?</p>
+            <div className="space-y-2">
+              <button
+                onClick={() => handleInputChange('churchAttendance', 'attend')}
+                className={`w-full p-4 border-2 rounded-lg font-semibold transition ${
+                  formData.churchAttendance === 'attend'
+                    ? 'border-pink-500 bg-pink-100'
+                    : 'border-gray-300 hover:border-pink-300'
+                }`}
+              >
+                ⛪ Attend Church
+              </button>
+              <button
+                onClick={() => handleInputChange('churchAttendance', 'home')}
+                className={`w-full p-4 border-2 rounded-lg font-semibold transition ${
+                  formData.churchAttendance === 'home'
+                    ? 'border-pink-500 bg-pink-100'
+                    : 'border-gray-300 hover:border-pink-300'
+                }`}
+              >
+                🏠 Pray from Home
+              </button>
+            </div>
+          </div>
+        )
+
+      case 3:
+        return (
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Church Details</h2>
+            <div>
+              <label className="block font-semibold mb-2">What is the name of your church?</label>
+              <input
+                type="text"
+                value={formData.churchName}
+                onChange={(e) => handleInputChange('churchName', e.target.value)}
+                placeholder="e.g., Harare Central Church"
+                className="w-full px-4 py-2 border border-pink-300 rounded-lg focus:outline-none focus:border-pink-500"
+              />
+            </div>
+          </div>
+        )
+
+      case 4:
+        return (
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Your Role in Church</h2>
+            <p className="text-gray-600">Do you serve in church or are you just a member?</p>
+            <div className="space-y-2">
+              <button
+                onClick={() => handleInputChange('churchRole', 'serve')}
+                className={`w-full p-4 border-2 rounded-lg font-semibold transition ${
+                  formData.churchRole === 'serve'
+                    ? 'border-pink-500 bg-pink-100'
+                    : 'border-gray-300 hover:border-pink-300'
+                }`}
+              >
+                🙏 I Serve in Church
+              </button>
+              <button
+                onClick={() => handleInputChange('churchRole', 'member')}
+                className={`w-full p-4 border-2 rounded-lg font-semibold transition ${
+                  formData.churchRole === 'member'
+                    ? 'border-pink-500 bg-pink-100'
+                    : 'border-gray-300 hover:border-pink-300'
+                }`}
+              >
+                👥 I'm a Member
+              </button>
+            </div>
+          </div>
+        )
+
+      case 5:
+        return (
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Service Department</h2>
+            <p className="text-gray-600">Which department do you serve in?</p>
+            <div>
+              <input
+                type="text"
+                value={formData.department}
+                onChange={(e) => handleInputChange('department', e.target.value)}
+                placeholder="e.g., Usher, Deacon, Choir, Pastor, etc."
+                className="w-full px-4 py-2 border border-pink-300 rounded-lg focus:outline-none focus:border-pink-500"
+              />
+            </div>
+          </div>
+        )
+
+      case 6:
+        return (
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Complete Your Profile</h2>
+            <div>
+              <label className="block font-semibold mb-2">Bio</label>
+              <textarea
+                value={formData.bio}
+                onChange={(e) => handleInputChange('bio', e.target.value)}
+                placeholder="Tell us about yourself... (optional)"
+                className="w-full px-4 py-2 border border-pink-300 rounded-lg focus:outline-none focus:border-pink-500 h-24"
+              />
+            </div>
+            {formData.gender === 'female' && (
+              <div>
+                <label className="block font-semibold mb-2">Join Diaspora Connect?</label>
+                <p className="text-sm text-gray-600 mb-3">Make your profile visible to Zimbabwean men abroad looking for marriage</p>
+                <div className="space-y-2">
+                  <button
+                    onClick={() => handleInputChange('joinDiasporaConnect', 'yes')}
+                    className={`w-full p-4 border-2 rounded-lg font-semibold transition ${
+                      formData.joinDiasporaConnect === 'yes'
+                        ? 'border-pink-500 bg-pink-100'
+                        : 'border-gray-300 hover:border-pink-300'
+                    }`}
+                  >
+                    ✓ Yes, Add to Diaspora Connect
+                  </button>
+                  <button
+                    onClick={() => handleInputChange('joinDiasporaConnect', 'no')}
+                    className={`w-full p-4 border-2 rounded-lg font-semibold transition ${
+                      formData.joinDiasporaConnect === 'no'
+                        ? 'border-pink-500 bg-pink-100'
+                        : 'border-gray-300 hover:border-pink-300'
+                    }`}
+                  >
+                    ✗ No, Keep Private
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )
+
+      default:
+        return null
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-rose-900 via-pink-600 to-pink-100 flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg p-8 max-w-md w-full shadow-lg">
+        {/* Progress Bar */}
+        <div className="mb-6">
+          <div className="flex justify-between text-sm font-semibold text-gray-600 mb-2">
+            <span>Step {step} of 6</span>
+            <span>{Math.round((step / 6) * 100)}%</span>
+          </div>
+          <div className="w-full bg-gray-200 rounded-full h-2">
+            <div
+              className="bg-pink-600 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${(step / 6) * 100}%` }}
+            ></div>
+          </div>
+        </div>
+
+        {/* Form Content */}
+        {renderStep()}
+
+        {/* Buttons */}
+        <div className="flex gap-4 mt-8">
+          {step > 1 && (
+            <button
+              onClick={handleBack}
+              className="flex items-center gap-2 px-6 py-2 border-2 border-pink-600 text-pink-600 rounded-lg font-semibold hover:bg-pink-50 transition"
+            >
+              <ChevronLeft size={20} /> Back
+            </button>
+          )}
+          {step < 6 && (
+            <button
+              onClick={handleNext}
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-2 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 transition"
+            >
+              Next <ChevronRight size={20} />
+            </button>
+          )}
+          {step === 6 && (
+            <button
+              onClick={handleSubmit}
+              className="flex-1 px-6 py-2 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 transition"
+            >
+              Create Profile
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+================================================================================
+FILE 7: src/pages/Dashboard.tsx
+================================================================================
+
+import { useState } from 'react'
+import { Heart, X, Settings, Globe } from 'lucide-react'
+
+export default function Dashboard({ onNavigate }: { onNavigate: (page: string) => void }) {
+  const [subscription, setSubscription] = useState('free')
+  const [showHideOption, setShowHideOption] = useState(false)
+  const [hiddenFromDiaspora, setHiddenFromDiaspora] = useState(false)
+
+  const currentUser = {
+    name: 'Sarah M.',
+    age: 28,
+    bio: 'Passionate about my faith and serving in church',
+    churchAttendance: 'Attend Church',
+    churchName: 'Harare Central Church',
+    churchRole: 'Serve in Church',
+    department: 'Choir',
+    joinedDiasporaConnect: true,
+  }
+
+  const profiles = [
+    {
+      id: 1,
+      name: 'John K.',
+      age: 30,
+      churchName: 'Harare Central Church',
+      churchRole: 'Serve in Church',
+      department: 'Usher',
+    },
+    {
+      id: 2,
+      name: 'David M.',
+      age: 32,
+      churchName: 'Grace Assembly',
+      churchRole: 'Member',
+    },
+    {
+      id: 3,
+      name: 'Peter L.',
+      age: 29,
+      churchName: 'Harare Central Church',
+      churchRole: 'Serve in Church',
+      department: 'Deacon',
+    },
+  ]
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-rose-900 via-pink-600 to-pink-100 p-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-white">💖 Dashboard</h1>
+          <button
+            onClick={() => onNavigate('home')}
+            className="px-4 py-2 bg-white text-pink-900 rounded-lg font-semibold hover:bg-pink-100 transition"
+          >
+            ← Home
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Sidebar */}
+          <div className="lg:col-span-1">
+            {/* Profile Card */}
+            <div className="bg-white rounded-lg p-6 shadow-lg mb-6">
+              <h3 className="font-bold text-lg mb-2">{currentUser.name}</h3>
+              <p className="text-gray-600 text-sm mb-4">{currentUser.bio}</p>
+              <div className="space-y-2 text-sm">
+                <p><strong>Church:</strong> {currentUser.churchName}</p>
+                <p><strong>Role:</strong> {currentUser.churchRole}</p>
+                {currentUser.department && (
+                  <p><strong>Department:</strong> {currentUser.department}</p>
+                )}
+              </div>
+            </div>
+
+            {/* Subscription */}
+            <div className="bg-white rounded-lg p-6 shadow-lg mb-6">
+              <h3 className="font-bold text-lg mb-4">Subscription</h3>
+              <p className="text-sm text-gray-600 mb-3">Current: <span className="font-bold capitalize">{subscription}</span></p>
+              <div className="space-y-2">
+                <button
+                  onClick={() => setSubscription('premium')}
+                  className={`w-full px-4 py-2 rounded-lg text-sm font-semibold transition ${
+                    subscription === 'premium'
+                      ? 'bg-pink-600 text-white'
+                      : 'bg-gray-100 hover:bg-pink-100'
+                  }`}
+                >
+                  Premium - $9.99/mo
+                </button>
+                <button
+                  onClick={() => setSubscription('vip')}
+                  className={`w-full px-4 py-2 rounded-lg text-sm font-semibold transition ${
+                    subscription === 'vip'
+                      ? 'bg-pink-600 text-white'
+                      : 'bg-gray-100 hover:bg-pink-100'
+                  }`}
+                >
+                  VIP - $29.99/mo
+                </button>
+              </div>
+            </div>
+
+            {/* Settings */}
+            <div className="bg-white rounded-lg p-6 shadow-lg">
+              <button
+                onClick={() => setShowHideOption(!showHideOption)}
+                className="w-full flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-pink-100 transition font-semibold"
+              >
+                <Settings size={18} /> Settings
+              </button>
+              {showHideOption && (
+                <div className="mt-4 space-y-2 border-t pt-4">
+                  <p className="text-sm font-semibold mb-2">Diaspora Connect Visibility</p>
+                  <button
+                    onClick={() => setHiddenFromDiaspora(!hiddenFromDiaspora)}
+                    className={`w-full px-4 py-2 rounded-lg text-sm font-semibold transition ${
+                      hiddenFromDiaspora
+                        ? 'bg-gray-200 text-gray-700'
+                        : 'bg-pink-100 text-pink-700'
+                    }`}
+                  >
+                    {hiddenFromDiaspora ? '🙈 Hidden from Diaspora' : '👁️ Visible to Diaspora'}
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="lg:col-span-3">
+            {/* Filters */}
+            <div className="bg-white rounded-lg p-6 shadow-lg mb-6">
+              <h3 className="font-bold text-lg mb-4">Browse Profiles</h3>
+              {subscription === 'premium' || subscription === 'vip' ? (
+                <div className="flex gap-2">
+                  <button className="px-4 py-2 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 transition">
+                    ⛪ Same Church Only
+                  </button>
+                  <button className="px-4 py-2 bg-gray-100 rounded-lg font-semibold hover:bg-gray-200 transition">
+                    All Profiles
+                  </button>
+                </div>
+              ) : (
+                <p className="text-sm text-gray-600">Upgrade to Premium to filter by church</p>
+              )}
+            </div>
+
+            {/* Diaspora Connect Link */}
+            <button
+              onClick={() => onNavigate('diaspora')}
+              className="w-full mb-6 px-6 py-4 bg-gradient-to-r from-pink-600 to-pink-700 text-white rounded-lg font-bold hover:from-pink-700 hover:to-pink-800 transition flex items-center justify-center gap-2"
+            >
+              <Globe size={20} /> Visit Diaspora Connect
+            </button>
+
+            {/* Profiles */}
+            <div className="space-y-6">
+              {profiles.map((profile) => (
+                <div key={profile.id} className="bg-white rounded-lg p-6 shadow-lg">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="text-2xl font-bold">{profile.name}</h3>
+                      <p className="text-gray-600">{profile.age} years old</p>
+                    </div>
+                  </div>
+                  <div className="space-y-2 mb-6">
+                    <p className="text-sm"><strong>Church:</strong> {profile.churchName}</p>
+                    <p className="text-sm"><strong>Role:</strong> {profile.churchRole}</p>
+                    {profile.department && (
+                      <p className="text-sm"><strong>Department:</strong> {profile.department}</p>
+                    )}
+                  </div>
+                  <div className="flex gap-4">
+                    <button className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-pink-600 text-white rounded-lg font-bold hover:bg-pink-700 transition">
+                      <Heart size={20} /> Like
+                    </button>
+                    <button className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gray-200 text-gray-700 rounded-lg font-bold hover:bg-gray-300 transition">
+                      <X size={20} /> Pass
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+================================================================================
+FILE 8: src/pages/DiasporaConnect.tsx
+================================================================================
+
+import { useState } from 'react'
+import { Video, MessageCircle, Heart } from 'lucide-react'
+
+export default function DiasporaConnect({ onNavigate }: { onNavigate: (page: string) => void }) {
+  const [userType, setUserType] = useState('men')
+  const [selectedPlan, setSelectedPlan] = useState('basic')
+
+  const menProfiles = [
+    {
+      id: 1,
+      name: 'Michael T.',
+      age: 35,
+      location: 'Johannesburg, South Africa',
+      occupation: 'Engineer',
+      churchName: 'City Chapel JNB',
+      plan: 'basic',
+    },
+    {
+      id: 2,
+      name: 'Samuel M.',
+      age: 38,
+      location: 'London, UK',
+      occupation: 'Doctor',
+      churchName: 'Kingdom Life Church',
+      plan: 'vetted',
+      verified: true,
+    },
+    {
+      id: 3,
+      name: 'Charles D.',
+      age: 32,
+      location: 'Sydney, Australia',
+      occupation: 'Business Owner',
+      churchName: 'Grace International',
+      plan: 'basic',
+    },
+  ]
+
+  const womenProfiles = [
+    {
+      id: 1,
+      name: 'Grace Z.',
+      age: 26,
+      location: 'Harare, Zimbabwe',
+      churchName: 'Harare Central Church',
+      vettingStatus: 'not-requested',
+      joinedDiaspora: true,
+    },
+    {
+      id: 2,
+      name: 'Faith M.',
+      age: 24,
+      location: 'Bulawayo, Zimbabwe',
+      churchName: 'Bulawayo Revival Church',
+      vettingStatus: 'verified',
+      vettingCost: 200,
+      joinedDiaspora: true,
+    },
+    {
+      id: 3,
+      name: 'Hope L.',
+      age: 28,
+      location: 'Harare, Zimbabwe',
+      churchName: 'City Church',
+      vettingStatus: 'pending',
+      joinedDiaspora: true,
+    },
+  ]
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-rose-900 via-pink-600 to-pink-100 p-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-white">🌍 Diaspora Connect</h1>
+          <button
+            onClick={() => onNavigate('home')}
+            className="px-4 py-2 bg-white text-pink-900 rounded-lg font-semibold hover:bg-pink-100 transition"
+          >
+            ← Home
+          </button>
+        </div>
+
+        {/* User Type Selection */}
+        <div className="flex gap-4 mb-8">
+          <button
+            onClick={() => setUserType('men')}
+            className={`flex-1 px-6 py-3 rounded-lg font-bold text-lg transition ${
+              userType === 'men'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            👨 For Men Abroad
+          </button>
+          <button
+            onClick={() => setUserType('women')}
+            className={`flex-1 px-6 py-3 rounded-lg font-bold text-lg transition ${
+              userType === 'women'
+                ? 'bg-pink-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            👩 For Women in Zimbabwe
+          </button>
+        </div>
+
+        {/* Men's Section */}
+        {userType === 'men' && (
+          <div className="space-y-6">
+            {/* Pricing Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className={`rounded-lg p-8 text-center cursor-pointer transition transform hover:scale-105 ${
+                selectedPlan === 'basic'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700'
+              }`}>
+                <h3 className="text-2xl font-bold mb-4">Basic Plan</h3>
+                <p className="text-4xl font-bold mb-4">$20<span className="text-lg">/month</span></p>
+                <ul className={`text-left space-y-3 mb-6 ${selectedPlan === 'basic' ? 'text-white' : 'text-gray-600'}`}>
+                  <li>✓ Browse women's profiles</li>
+                  <li>✓ Messaging & chat</li>
+                  <li>✓ Video calls (up to 30 min/day)</li>
+                  <li>✗ Verified women only</li>
+                  <li>✗ Vetting service</li>
+                </ul>
+                <button
+                  onClick={() => setSelectedPlan('basic')}
+                  className={`w-full px-6 py-3 rounded-lg font-bold transition ${
+                    selectedPlan === 'basic'
+                      ? 'bg-white text-blue-600 hover:bg-gray-100'
+                      : 'bg-blue-600 text-white hover:bg-blue-700'
+                  }`}
+                >
+                  {selectedPlan === 'basic' ? '✓ Selected' : 'Choose Plan'}
+                </button>
+              </div>
+
+              <div className={`rounded-lg p-8 text-center cursor-pointer transition transform hover:scale-105 border-4 ${
+                selectedPlan === 'vetted'
+                  ? 'bg-pink-600 text-white shadow-lg border-pink-600'
+                  : 'bg-white text-gray-700 border-pink-300'
+              }`}>
+                <div className={`inline-block px-4 py-1 rounded-full mb-4 text-sm font-bold ${
+                  selectedPlan === 'vetted'
+                    ? 'bg-white text-pink-600'
+                    : 'bg-pink-100 text-pink-600'
+                }`}>
+                  PREMIUM
+                </div>
+                <h3 className="text-2xl font-bold mb-4">Vetted Plan</h3>
+                <p className="text-4xl font-bold mb-4">$50<span className="text-lg">/month</span></p>
+                <ul className={`text-left space-y-3 mb-6 ${selectedPlan === 'vetted' ? 'text-white' : 'text-gray-600'}`}>
+                  <li>✓ Everything in Basic</li>
+                  <li>✓ Verified women only</li>
+                  <li>✓ Face-to-face vetting</li>
+                  <li>✓ Background verified</li>
+                  <li>✓ Unlimited video calls</li>
+                </ul>
+                <button
+                  onClick={() => setSelectedPlan('vetted')}
+                  className={`w-full px-6 py-3 rounded-lg font-bold transition ${
+                    selectedPlan === 'vetted'
+                      ? 'bg-white text-pink-600 hover:bg-gray-100'
+                      : 'bg-pink-600 text-white hover:bg-pink-700'
+                  }`}
+                >
+                  {selectedPlan === 'vetted' ? '✓ Selected' : 'Choose Plan'}
+                </button>
+              </div>
+            </div>
+
+            {/* Vetting Pricing Info */}
+            <div className="bg-white rounded-lg p-6 shadow-lg mb-8">
+              <h3 className="font-bold text-lg mb-4">Vetting Service Pricing</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <p className="font-semibold text-blue-900">📍 Harare Location</p>
+                  <p className="text-2xl font-bold text-blue-600 mt-2">$100</p>
+                  <p className="text-sm text-gray-600 mt-1">Face-to-face interview</p>
+                </div>
+                <div className="p-4 bg-pink-50 rounded-lg">
+                  <p className="font-semibold text-pink-900">📍 Outside Harare</p>
+                  <p className="text-2xl font-bold text-pink-600 mt-2">$200</p>
+                  <p className="text-sm text-gray-600 mt-1">Includes transport & accommodation</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Men Profiles */}
+            <h3 className="text-2xl font-bold text-white mb-4">Diaspora Men Available Now</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {menProfiles.map((profile) => (
+                <div key={profile.id} className="bg-white rounded-lg p-6 shadow-lg">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h4 className="text-xl font-bold">{profile.name}</h4>
+                      <p className="text-gray-600">{profile.age} years old</p>
+                      <p className="text-sm text-gray-500 mt-1">📍 {profile.location}</p>
+                    </div>
+                    {profile.verified && (
+                      <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">✓ Verified</div>
+                    )}
+                  </div>
+                  <div className="space-y-2 mb-6 text-sm">
+                    <p><strong>Occupation:</strong> {profile.occupation}</p>
+                    <p><strong>Church:</strong> {profile.churchName}</p>
+                    <p><strong>Plan:</strong> <span className="capitalize font-semibold">{profile.plan}</span></p>
+                  </div>
+                  <div className="flex gap-2">
+                    <button className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition">
+                      <Video size={18} /> Call
+                    </button>
+                    <button className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition">
+                      <MessageCircle size={18} /> Chat
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Women's Section */}
+        {userType === 'women' && (
+          <div className="space-y-6">
+            {/* Info Card */}
+            <div className="bg-white rounded-lg p-6 shadow-lg mb-8">
+              <h3 className="text-2xl font-bold text-pink-900 mb-4">Welcome to Diaspora Connect!</h3>
+              <p className="text-gray-700 mb-4">
+                <strong>Join FREE</strong> and connect with Zimbabwean men looking for serious relationships and marriage.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                <div className="p-4 bg-pink-50 rounded-lg text-center">
+                  <p className="text-3xl">👁️</p>
+                  <p className="font-semibold text-pink-900 mt-2">Free to Join</p>
+                  <p className="text-sm text-gray-600">No signup costs</p>
+                </div>
+                <div className="p-4 bg-pink-50 rounded-lg text-center">
+                  <p className="text-3xl">💬</p>
+                  <p className="font-semibold text-pink-900 mt-2">Message & Video Call</p>
+                  <p className="text-sm text-gray-600">Connect freely</p>
+                </div>
+                <div className="p-4 bg-pink-50 rounded-lg text-center">
+                  <p className="text-3xl">✓</p>
+                  <p className="font-semibold text-pink-900 mt-2">Optional Vetting</p>
+                  <p className="text-sm text-gray-600">Verify yourself</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Vetting Pricing for Women */}
+            <div className="bg-white rounded-lg p-6 shadow-lg mb-8">
+              <h3 className="font-bold text-lg mb-4">Vetting Pricing</h3>
+              <p className="text-gray-600 mb-4">Get verified through face-to-face interviews to access premium men's profiles</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="p-4 border-2 border-pink-300 rounded-lg">
+                  <p className="font-semibold text-pink-900">📍 Living in Harare</p>
+                  <p className="text-2xl font-bold text-pink-600 mt-2">$100</p>
+                  <p className="text-sm text-gray-600 mt-1">Face-to-face interview with admin</p>
+                </div>
+                <div className="p-4 border-2 border-pink-300 rounded-lg">
+                  <p className="font-semibold text-pink-900">📍 Outside Harare</p>
+                  <p className="text-2xl font-bold text-pink-600 mt-2">$200</p>
+                  <p className="text-sm text-gray-600 mt-1">Includes transport & accommodation</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Women Profiles */}
+            <h3 className="text-2xl font-bold text-white mb-4">Women Available Now</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {womenProfiles.map((profile) => (
+                <div key={profile.id} className="bg-white rounded-lg p-6 shadow-lg">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h4 className="text-xl font-bold">{profile.name}</h4>
+                      <p className="text-gray-600">{profile.age} years old</p>
+                      <p className="text-sm text-gray-500 mt-1">📍 {profile.location}</p>
+                    </div>
+                    <div>
+                      {profile.vettingStatus === 'verified' && (
+                        <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">✓ Verified</div>
+                      )}
+                      {profile.vettingStatus === 'pending' && (
+                        <div className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">⏳ Pending</div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="space-y-2 mb-6 text-sm">
+                    <p><strong>Church:</strong> {profile.churchName}</p>
+                    <p><strong>Diaspora Connected:</strong> {profile.joinedDiaspora ? '✓ Yes' : '✗ No'}</p>
+                    {profile.vettingStatus === 'verified' && (
+                      <p className="text-green-600 font-semibold">Verified by administration</p>
+                    )}
+                  </div>
+                  <div className="flex gap-2">
+                    <button className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-700 transition">
+                      <Heart size={18} /> Like
+                    </button>
+                    <button className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition">
+                      <MessageCircle size={18} /> View
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+================================================================================
+FILE 9: vite.config.ts
+================================================================================
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+})
+
+================================================================================
+FILE 10: tsconfig.json
+================================================================================
+
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+
+================================================================================
+FILE 11: tailwind.config.js
+================================================================================
+
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+================================================================================
+FILE 12: postcss.config.js
+================================================================================
+
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+
+================================================================================
+FILE 13: manifest.json (in public folder)
+================================================================================
+
+{
+  "name": "Lifestyle Connect",
+  "short_name": "Lifestyle",
+  "description": "A faith-based dating platform for Zimbabweans",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ec4899",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%23ec4899' width='192' height='192'/><text x='96' y='120' font-size='80' font-weight='bold' text-anchor='middle' fill='white'>❤️</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["lifestyle", "social"],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><rect fill='%23ec4899' width='540' height='720'/><text x='270' y='360' font-size='80' text-anchor='middle' fill='white'>💖 Lifestyle Connect</text></svg>",
+      "sizes": "540x720",
+      "form_factor": "narrow"
+    }
+  ]
+}
+
+================================================================================
+FILE 14: sw.js (in public folder - Service Worker)
+================================================================================
+
+const CACHE_NAME = 'lifestyle-connect-v1'
+const urlsToCache = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+]
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(urlsToCache)
+    })
+  )
+})
+
+self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') {
+    return
+  }
+
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      if (response) {
+        return response
+      }
+      return fetch(event.request).then((response) => {
+        if (!response || response.status !== 200 || response.type !== 'basic') {
+          return response
+        }
+        const responseToCache = response.clone()
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, responseToCache)
+        })
+        return response
+      })
+    }).catch(() => {
+      return new Response('Offline - content not available', {
+        status: 503,
+        statusText: 'Service Unavailable',
+        headers: new Headers({
+          'Content-Type': 'text/plain'
+        })
+      })
+    })
+  )
+})
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName)
+          }
+        })
+      )
+    })
+  )
+})
+
+================================================================================
+
+THAT'S IT! You now have all 14 files with their exact contents.
+
+Next steps:
+1. Create a Replit account at https://replit.com
+2. Create a new Node.js project
+3. Copy and paste each file content above
+4. Follow the REPLIT_SETUP_GUIDE.txt for installation
+5. Deploy!
+
+================================================================================
