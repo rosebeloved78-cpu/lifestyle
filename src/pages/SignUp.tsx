@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { ChevronRight, ChevronLeft, Church, User, ShieldCheck, Users } from 'lucide-react'
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth"
+import { auth } from "../firebase"
 
 interface SignUpProps {
   onSignUpComplete: (profile: any) => void
@@ -111,17 +113,34 @@ export default function SignUp({ onSignUpComplete }: SignUpProps) {
     setStep(prevStep)
   }
 
-  const handleSubmit = () => {
-    if (!validateStep()) return
+  const handleSubmit = async () => {
+  if (!validateStep()) return
+
+  try {
+    // Create user in Firebase Auth
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      formData.email,
+      formData.password
+    )
+
+    // Send email verification
+    await sendEmailVerification(userCredential.user)
 
     const profile = {
       ...formData,
+      uid: userCredential.user.uid,
+      emailVerified: false,
       subscription: 'free',
       joinDate: new Date().toLocaleDateString(),
     }
 
     onSignUpComplete(profile)
+  } catch (error: any) {
+    console.error('Firebase Auth Error:', error)
+    setErrors([error.message || 'Failed to create account. Please try again.'])
   }
+}
 
   const renderStep = () => {
     switch (step) {
@@ -393,11 +412,11 @@ export default function SignUp({ onSignUpComplete }: SignUpProps) {
 
           {step === 7 && (
             <button
-              onClick={handleSubmit}
-              className="flex items-center gap-2 px-8 py-4 bg-green-500 text-white rounded-2xl font-bold hover:bg-green-600 hover:shadow-xl hover:shadow-green-100 transition-all ml-auto"
-            >
-              Complete Sign Up
-            </button>
+  onClick={handleSubmit}
+  className="flex items-center gap-2 px-8 py-4 bg-green-500 text-white rounded-2xl font-bold hover:bg-green-600 hover:shadow-xl hover:shadow-green-100 transition-all ml-auto"
+>
+  Complete Sign Up
+</button>
           )}
         </div>
       </div>
