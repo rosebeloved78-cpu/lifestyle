@@ -27,7 +27,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-400 via-blue-200 via-rose-200 to-rose-100 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-blue-200 via-rose-200 to-rose-100 flex flex-col">
       {/* Navigation Header */}
       <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-rose-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
