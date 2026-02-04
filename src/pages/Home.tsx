@@ -252,7 +252,7 @@ export default function Home({ onGetStarted }: HomeProps) {
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-8 tracking-tight leading-tight">
-            Zimbabwean Christians <br/>are waiting for <span className="text-rose-600 underline">you.</span>
+            Your Spouse <br/>is waiting for <span className="text-rose-600 underline">you.</span>
           </h2>
           <button
             onClick={onGetStarted}
