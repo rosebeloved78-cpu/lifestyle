@@ -20,7 +20,7 @@ export default function Home({ onGetStarted }: HomeProps) {
             </h1>
             <p className="text-xl md:text-2xl text-black-600 mb-10 leading-relaxed font-medium">
               Lifestyle Connect is built for Zimbabwean Christians who value faith, 
-              tradition, and meaningful relationships. Connect with someone who shares your faith.
+              tradition, and meaningful relationships. Connect with your destiny helper, not a destiny robber.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
