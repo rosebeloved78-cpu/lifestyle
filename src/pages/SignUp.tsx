@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ChevronRight, ChevronLeft, Church, User, ShieldCheck, Users } from 'lucide-react'
-import { auth, createUserWithEmailAndPassword, sendEmailVerification } from "../firebase-cdn"
+import { auth, createUserWithEmailAndPassword, sendEmailVerification } from "../utils/firebase"
 
 interface SignUpProps {
   onSignUpComplete: (profile: any) => void
